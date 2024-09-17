@@ -124,15 +124,55 @@ const CalendarComponent = () => {
     setCurrentDate(updatedDate);
   };
 
-  const renderEvent = ({ event }) => {
+  const CustomToolbar = (toolbar) => {
+    const goToToday = () => {
+      toolbar.onNavigate('TODAY');
+    };
+
+    const goToMonth = () => {
+      toolbar.onView('month');
+    };
+
+    const goToYear = () => {
+      toolbar.onView('year'); // If a year view is implemented
+    };
+
+    const goToWeek = () => {
+      toolbar.onView('week');
+    };
+
+    const goToDay = () => {
+      toolbar.onView('day');
+    };
+
     return (
-      <div className="event-box" onClick={() => handleSelectEvent(event)}>
-        <div className="event-box-content">
-          {event.title}
-          <a href={event.link} target="_blank" rel="noopener noreferrer">
-            {event.link}
-          </a>
-        </div>
+      <div className="rbc-toolbar">
+        <span className="rbc-btn-group">
+          <button type="button" onClick={goToToday}>
+            Today
+          </button>
+          <button type="button" onClick={() => toolbar.onNavigate('PREV')}>
+            &lt;
+          </button>
+          <button type="button" onClick={() => toolbar.onNavigate('NEXT')}>
+            &gt;
+          </button>
+        </span>
+        <span className="rbc-toolbar-label">{toolbar.label}</span>
+        <span className="rbc-btn-group">
+          <button type="button" onClick={goToMonth}>
+            Month
+          </button>
+          <button type="button" onClick={goToWeek}>
+            Week
+          </button>
+          <button type="button" onClick={goToDay}>
+            Day
+          </button>
+          <button type="button" onClick={goToYear}>
+            Year
+          </button>
+        </span>
       </div>
     );
   };
@@ -141,7 +181,7 @@ const CalendarComponent = () => {
     <div className="calendar-container">
       <h2>Calendar of Events</h2>
       <div className="dropdown-container">
-        <label htmlFor="month-select">Month:</label>
+        {/* <label htmlFor="month-select">Month:</label> */}
         <select id="month-select" value={currentDate.getMonth()} onChange={handleMonthChange}>
           {moment.months().map((month, index) => (
             <option key={index} value={index}>
@@ -150,7 +190,7 @@ const CalendarComponent = () => {
           ))}
         </select>
 
-        <label htmlFor="year-select">Year:</label>
+        {/* <label htmlFor="year-select">Year:</label> */}
         <select id="year-select" value={currentDate.getFullYear()} onChange={handleYearChange}>
           {[...Array(5)].map((_, i) => {
             const year = new Date().getFullYear() + i - 2; // Display 2 years back and 2 years ahead
@@ -169,15 +209,15 @@ const CalendarComponent = () => {
         startAccessor="start"
         endAccessor="end"
         style={{ height: 600 }}
-        views={['week', 'day']}
+        views={['week', 'day', 'month']}
         defaultView="week"
         eventPropGetter={eventStyleGetter}
-        components={{
-          event: renderEvent, // Use renderEvent for custom rendering
-        }}
         date={currentDate} // Date controlled by dropdowns
         onNavigate={setCurrentDate} // Allow navigation
         onSelectEvent={handleSelectEvent}
+        components={{
+          toolbar: CustomToolbar, // Custom toolbar with Month and Year buttons
+        }}
       />
       {selectedEventGroup && (
         <EventPopup

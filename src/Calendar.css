@@ -160,7 +160,7 @@ button:hover {
   background-color: white;
   color: blue; /* Time label color */
   font-weight: bold;
-  padding: 10px;
+  /* padding: 10px; */
   width: 80px; /* Adjusted width to align with the header */
   height: 60px; /* Ensures alignment with the header */
 }
@@ -338,22 +338,134 @@ h2 {
   border-radius: 8px;
 }
 
-.dropdown-container {
+.event-box {
+  background-color: #0056b3;
+  border-radius: 8px;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.event-box-content {
+  font-size: 14px;
+}
+
+.event-box a {
+  color: yellow;
+  text-decoration: none;
+}
+
+.event-box a:hover {
+  text-decoration: underline;
+}
+
+.rbc-today {
+  background-color: transparent !important;
+  color: inherit;
+}
+.controls {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-.dropdown-container label {
-  margin-right: 5px;
-  font-weight: bold;
-}
-
-.dropdown-container select {
+.controls select {
+  margin-left: 10px;
   padding: 5px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  outline: none;
+  background-color: #fff;
+}
+
+.rbc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rbc-btn-group {
+  display: flex;
+}
+
+.rbc-btn-group button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  background-color: #0056b3;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none; /* Removes the border */
+}
+
+.rbc-btn-group button:hover {
+  background-color: #003a75;
+}
+
+.event-popup {
+  position: absolute;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 250px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.popup-buttons button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #0056b3;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.popup-buttons button:hover {
+  background-color: #004494;
+}
+.rbc-time-slot {
+  border-bottom: 1px solid #e0e0e0;
+}
+.dropdown-container {
+  padding-left: 800px;
+  padding-bottom: 20px;
+}
+
+/* Popup Styles */
+.event-popup {
+  position: absolute; /* Changed to absolute for relative positioning within the calendar */
+  background-color: white;
+  padding: 10px; /* Reduced padding for a smaller box */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none; /* Initially hidden */
+  width: 200px; /* Set width for a small box */
+  max-height: 150px; /* Restrict height to keep it small */
+  overflow: auto; /* Scroll if content overflows */
+}
+
+/* Popup Positioning */
+.event-popup.active {
+  display: block; /* Show popup when active */
+}
+
+/* Popup Content */
+.popup-content {
+  text-align: left;
+}
+
+.popup-content h3 {
+  margin-top: 0;
 }
 
