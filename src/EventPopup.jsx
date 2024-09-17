@@ -1,21 +1,24 @@
 import React from 'react';
-// import './EventPopup.css';
 
-const EventPopup = ({ event, closePopup }) => {
+const EventPopup = ({ events, closePopup }) => {
   return (
     <div className="popup-container">
       <div className="popup-content">
-        <h3>{event.title}</h3>
-        <p><strong>Start:</strong> {event.start.toLocaleString()}</p>
-        <p><strong>End:</strong> {event.end.toLocaleString()}</p>
-        <p><strong>Description:</strong> {event.desc || 'No description provided'}</p>
-        {event.link && (
-          <p>
-            <a href={event.link} target="_blank" rel="noopener noreferrer">
-              Event Link
-            </a>
-          </p>
-        )}
+        {events.map((e) => (
+          <div key={e.id} className="popup-event-details">
+            <h3>{e.summary}</h3>
+            <p>{e.desc}</p>
+            <p>
+              <strong>Candidate: </strong>
+              {e.user_det.candidate.candidate_firstName} {e.user_det.candidate.candidate_lastName}
+            </p>
+            <p>
+              <a href={e.link} target="_blank" rel="noopener noreferrer">
+                {e.link}
+              </a>
+            </p>
+          </div>
+        ))}
         <button className="close-btn" onClick={closePopup}>
           Close
         </button>
